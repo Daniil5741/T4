@@ -7,24 +7,26 @@ import java.util.Scanner;
 public class MiniMusicCmdLine {
     public static void main(String[] args) {
         MiniMusicCmdLine mini = new MiniMusicCmdLine();
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            int instrument = scanner.nextInt();
-            int note = scanner.nextInt();
-            mini.play(instrument, note);
-        }
-
+//        Scanner scanner = new Scanner(System.in);
+//        while (true) {
+//            int instrument = scanner.nextInt();
+//            int note = scanner.nextInt();
+//            mini.play(instrument, note);
+//        }
+mini.play(30,50);
 
     }
 
     public void play(int instrument, int note) {
         try {
+
             Sequencer player = MidiSystem.getSequencer();
             player.open();
             Sequence seq = new Sequence(Sequence.PPQ, 4);
             Track track = seq.createTrack();
 
             MidiEvent event = null;
+
 
             ShortMessage first = new ShortMessage();
             first.setMessage(192, 1, instrument, 0);
@@ -40,6 +42,7 @@ public class MiniMusicCmdLine {
             b.setMessage(128, 1, note, 16);
             MidiEvent noteOff = new MidiEvent(b, 16);
             track.add(noteOff);
+
 
             ShortMessage first1 = new ShortMessage();
             first1.setMessage(192, 1, (instrument+30), 0);
@@ -59,6 +62,7 @@ public class MiniMusicCmdLine {
             player.setSequence(seq);
 
             player.start();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.print("Нота не была проиграна");

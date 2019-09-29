@@ -2,57 +2,75 @@ import java.io.*;
 import java.util.*;
 
 import static java.lang.Math.*;
-import static java.util.Arrays.*;
 import static java.util.Collections.*;
 
 public class Lab1 {
     FastScanner in;
     PrintWriter out;
 
-    private void solve() throws IOException {
-        int n = in.nextInt();
-        double[] ar = new double[n];
-        for (int i = 0; i < n; i++) {
-            ar[i] = in.nextDouble();
-        }
+    public static void quickSort(int[] ar, int l, int r) {
+        if (ar.length == 0)
+            return;
 
-        double[] br = new double[n];
+        if (l >= r)
+            return;
 
-        for (int i = 0; i < n; i++) {
-            br[i] = ar[i];
-        }
-        double key = 0;
-        for (int i = 1; i < n; i++) {
-            key = ar[i];
-            int j = i - 1;
-            while (j >= 0 && ar[j] > key) {
-                ar[j + 1] = ar[j];
+        int q = (int) ((Math.random() * ((r - l) + 1)) + l);
+        int selected = ar[q];
+
+        int i = l, j = r;
+        while (i <= j) {
+            while (ar[i] < selected) {
+                i++;
+            }
+            while (ar[j] > selected) {
                 j--;
             }
-            ar[j + 1] = key;
-        }
-        double left = ar[0];
-        double middle = ar[n / 2];
-        double hight = ar[n - 1];
-        for (int i = 0; i < br.length; i++) {
-            if (left == br[i]) {
-                left = i + 1;
-                break;
+            if (i <= j) {//меняем местами
+                int t = ar[i];
+                ar[i] = ar[j];
+                ar[j] = t;
+                i++;
+                j--;
             }
         }
-        for (int i = 0; i < br.length; i++) {
-            if (middle == br[i]) {
-                middle = i + 1;
-                break;
-            }
+        if (l < j)
+            quickSort(ar, l, j);//для левой сортировки
+
+        if (i < r)
+            quickSort(ar, i, r);//для правой сортировки
+    }
+
+    //    int findOrderStatistic(int[] array, int k) {
+//        int left = 0, right = array.length;
+//        while (true) {
+//           // int mid = partition(array, left, right);
+//
+//            if (mid == k) {
+//                return array[mid];
+//            }
+//            else if (k < mid) {
+//                right = mid;
+//            }
+//            else {
+//                left = mid + 1;
+//            }
+//        }
+//    }
+    private void solve() throws IOException {
+        int n = in.nextInt();
+
+        ArrayList<String[]> countries = new ArrayList<>();
+
+        String[] str = new String[n];
+        int j =0;
+        for (int i = 0; i < 3; i++) {
+            String s =in.next();
+          if (!countries.contains(s)){
+
+          }
         }
-        for (int i = 0; i < br.length; i++) {
-            if (hight == br[i]) {
-                hight = i + 1;
-                break;
-            }
-        }
-        out.print((int)left + " " + (int)middle + " " + (int)hight);
+
 
     }
 
@@ -97,9 +115,9 @@ public class Lab1 {
 
     private void run() throws IOException {
         in = //new FastScanner(System.in);
-         new FastScanner(new FileInputStream("sortland.in"));
-         out = //new PrintWriter(System.out);
-         new PrintWriter(new FileOutputStream("sortland.out"));
+                new FastScanner(new FileInputStream("sort.in"));
+        out = //new PrintWriter(System.out);
+                new PrintWriter(new FileOutputStream("sort.out"));
         solve();
         out.flush();
         out.close();

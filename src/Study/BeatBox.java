@@ -198,7 +198,7 @@ public class BeatBox {
     public class MySendListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser jFileChooser=new JFileChooser();
+            JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.showSaveDialog(theFrame);
             boolean[] checkBoxState = new boolean[256];
 
@@ -222,7 +222,7 @@ public class BeatBox {
         @Override
         public void actionPerformed(ActionEvent e) {
             boolean checkBoxState[] = null;
-            JFileChooser jFileChooser=new JFileChooser();
+            JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.showOpenDialog(theFrame);
             try {
                 FileInputStream fileInputStream = new FileInputStream(jFileChooser.getSelectedFile());
